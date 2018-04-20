@@ -5,16 +5,18 @@
  */
 package form;
 
+import dao.MedicamentoDao;
+
 /**
  *
  * @author Luís Gustavo
  */
 public class FormPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormPrincipal
-     */
+    public static MedicamentoDao bdMedicamento;
+    
     public FormPrincipal() {
+        bdMedicamento = new MedicamentoDao();
         initComponents();
     }
 
@@ -39,6 +41,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Farmácia");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -60,6 +67,11 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         JMenuItemCadastrarMedicamento.setText("Cadastrar Medicamento");
         JMenuItemCadastrarMedicamento.setName("JMenuItemCadastrarMedicamento"); // NOI18N
+        JMenuItemCadastrarMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItemCadastrarMedicamentoActionPerformed(evt);
+            }
+        });
         JMenuOperacoes.add(JMenuItemCadastrarMedicamento);
         JMenuOperacoes.add(jSeparator1);
 
@@ -83,6 +95,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(620, 378));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JMenuItemCadastrarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemCadastrarMedicamentoActionPerformed
+        new FormCadastroMedicamento().setVisible(true);
+    }//GEN-LAST:event_JMenuItemCadastrarMedicamentoActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
