@@ -253,6 +253,11 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btEditar.setMaximumSize(new java.awt.Dimension(125, 57));
         btEditar.setName("btEditar"); // NOI18N
         btEditar.setPreferredSize(new java.awt.Dimension(125, 57));
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -417,7 +422,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Já existe este medicamento cadastrado!", "Cadastro Existente", JOptionPane.ERROR_MESSAGE);
             }else{
                 FormPrincipal.bdMedicamento.adicionaMedicamento(medicamento);
-                JOptionPane.showMessageDialog(null, "Medicamento cadastrado com sucesso!", "Cadastro de Medicamento", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Medicamento cadastrado com sucesso!\n" + medicamento.toString(), "Cadastro de Medicamento", JOptionPane.INFORMATION_MESSAGE);
                 btInserir.setEnabled(false);
             }            
         }else{
@@ -464,6 +469,33 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btVenderActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        int recebe = JOptionPane.showConfirmDialog(null, "Deseja mesmo alterar as informações?", "Confirmação de Alteração", JOptionPane.YES_NO_OPTION);
+        if(recebe == 0){
+            Medicamento medicamento = FormPrincipal.bdMedicamento.buscaMedicamento(tfCodigoBarra.getText(), tfNome.getText());
+            if(medicamento != null){
+                medicamento.setCodigoBarra(tfCodigoBarra.getText());
+                medicamento.setNome(tfNome.getText());
+                medicamento.setLaboratorio(tfLaboratorio.getText());
+                medicamento.setValorUnitario(Double.parseDouble(tfValorUnitario.getText()));
+                medicamento.setComposicao(taComposicao.getText());
+                medicamento.setQuantidadeEstoque(Integer.parseInt(tfQuantidadeEstoque.getText()));
+                medicamento.setLocalizacao(cbLocalizacao.getSelectedItem().toString());
+                JRadioButton radio;
+                Enumeration jr = bgTipo.getElements(); 
+                while ( jr.hasMoreElements() )
+                {
+                    radio = (JRadioButton) jr.nextElement(); 
+                    if (radio.isSelected())
+                    {
+                        medicamento.setTipo(radio.getText());
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Medicamento alterado com sucesso!", "Alteração de Dados", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btEditarActionPerformed
 
     /**
      * @param args the command line arguments

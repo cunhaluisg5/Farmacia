@@ -538,6 +538,9 @@
               <Dimension value="[125, 57]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEditarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
