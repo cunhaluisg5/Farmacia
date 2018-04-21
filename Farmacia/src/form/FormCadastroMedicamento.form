@@ -426,6 +426,9 @@
               <Dimension value="[125, 57]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btInserirActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btBuscar">
           <Properties>

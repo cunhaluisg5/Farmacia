@@ -5,6 +5,11 @@
  */
 package form;
 
+import java.util.Enumeration;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import model.Medicamento;
+
 /**
  *
  * @author Luís Gustavo
@@ -187,6 +192,11 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btInserir.setMaximumSize(new java.awt.Dimension(125, 57));
         btInserir.setName("btInserir"); // NOI18N
         btInserir.setPreferredSize(new java.awt.Dimension(125, 57));
+        btInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInserirActionPerformed(evt);
+            }
+        });
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/buscar.png"))); // NOI18N
@@ -350,6 +360,34 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_tfQuantidadeEstoqueKeyTyped
+
+    private void btInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInserirActionPerformed
+        Medicamento medicamento = new Medicamento();
+        medicamento.setCodigoBarra(tfCodigoBarra.getText());
+        medicamento.setNome(tfNome.getText());
+        medicamento.setLaboratorio(tfLaboratorio.getText());
+        medicamento.setValorUnitario(Double.parseDouble(tfValorUnitario.getText()));
+        medicamento.setComposicao(taComposicao.getText());
+        medicamento.setQuantidadeEstoque(Integer.parseInt(tfQuantidadeEstoque.getText()));
+        medicamento.setLocalizacao(cbLocalizacao.getSelectedItem().toString());
+        JRadioButton radio;
+        Enumeration jr = bgTipo.getElements(); 
+        while ( jr.hasMoreElements() )
+        {
+            radio = (JRadioButton) jr.nextElement(); 
+            if (radio.isSelected())
+            {
+                medicamento.setTipo(radio.getText());
+            }
+        }
+        
+        if(medicamento.validaMedicamento()){
+            FormPrincipal.bdMedicamento.adicionaMedicamento(medicamento);
+            JOptionPane.showMessageDialog(null, "Medicamento cadastrado com sucesso!", "Cadastro de Medicamento", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Falta de Preenchimento", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btInserirActionPerformed
 
     /**
      * @param args the command line arguments
