@@ -34,6 +34,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         JMenuOperacoes = new javax.swing.JMenu();
         JMenuItemCadastrarMedicamento = new javax.swing.JMenuItem();
@@ -44,6 +45,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Farmácia");
+        setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -52,17 +54,12 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 604, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
-        );
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.jpeg"))); // NOI18N
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -106,7 +103,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(620, 378));
+        setSize(new java.awt.Dimension(604, 340));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -125,6 +122,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void JMenuItemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemSobreActionPerformed
         String nome = "Luís Gustavo da Cunha Cipriani";
         Calendar c = Calendar.getInstance();
+        c.set(2018, Calendar.APRIL, 21);
         Date data = c.getTime();
         DateFormat formataData = DateFormat.getDateInstance();
         JOptionPane.showMessageDialog(null, nome + "\n" + formataData.format(data), "Informações", JOptionPane.INFORMATION_MESSAGE);
@@ -171,6 +169,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMenuItemSair;
     private javax.swing.JMenuItem JMenuItemSobre;
     private javax.swing.JMenu JMenuOperacoes;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;

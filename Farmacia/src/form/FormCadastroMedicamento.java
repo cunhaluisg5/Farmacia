@@ -5,7 +5,9 @@
  */
 package form;
 
+import java.awt.Color;
 import java.util.Enumeration;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import model.Medicamento;
@@ -21,6 +23,12 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
      */
     public FormCadastroMedicamento() {
         initComponents();
+        btBuscar.setBackground(Color.white);
+        btEditar.setBackground(Color.white);
+        btInserir.setBackground(Color.white);
+        btLimpar.setBackground(Color.white);
+        btSair.setBackground(Color.white);
+        btVender.setBackground(Color.white);
     }
 
     /**
@@ -193,6 +201,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btInserir.setMaximumSize(new java.awt.Dimension(125, 57));
         btInserir.setName("btInserir"); // NOI18N
         btInserir.setPreferredSize(new java.awt.Dimension(125, 57));
+        btInserir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/inserirSelecionado.png"))); // NOI18N
         btInserir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btInserirActionPerformed(evt);
@@ -205,6 +214,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btBuscar.setMaximumSize(new java.awt.Dimension(125, 57));
         btBuscar.setName("btBuscar"); // NOI18N
         btBuscar.setPreferredSize(new java.awt.Dimension(125, 57));
+        btBuscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/buscarSelecionado.png"))); // NOI18N
         btBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBuscarActionPerformed(evt);
@@ -217,6 +227,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btLimpar.setMaximumSize(new java.awt.Dimension(125, 57));
         btLimpar.setName("btLimpar"); // NOI18N
         btLimpar.setPreferredSize(new java.awt.Dimension(125, 57));
+        btLimpar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limparSelecionado.png"))); // NOI18N
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btLimparActionPerformed(evt);
@@ -228,6 +239,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btVender.setText("Vender");
         btVender.setEnabled(false);
         btVender.setName("btVender"); // NOI18N
+        btVender.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/venderSelecionado.png"))); // NOI18N
         btVender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btVenderActionPerformed(evt);
@@ -240,6 +252,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btSair.setMaximumSize(new java.awt.Dimension(125, 57));
         btSair.setName("btSair"); // NOI18N
         btSair.setPreferredSize(new java.awt.Dimension(125, 57));
+        btSair.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sairSelecionado.png"))); // NOI18N
         btSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSairActionPerformed(evt);
@@ -253,6 +266,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btEditar.setMaximumSize(new java.awt.Dimension(125, 57));
         btEditar.setName("btEditar"); // NOI18N
         btEditar.setPreferredSize(new java.awt.Dimension(125, 57));
+        btEditar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/editarSelecionado.png"))); // NOI18N
         btEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEditarActionPerformed(evt);
