@@ -176,7 +176,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbAnsiolitico)
                     .addComponent(rbAntibiotico)
@@ -204,6 +204,11 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btBuscar.setMaximumSize(new java.awt.Dimension(125, 57));
         btBuscar.setName("btBuscar"); // NOI18N
         btBuscar.setPreferredSize(new java.awt.Dimension(125, 57));
+        btBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarActionPerformed(evt);
+            }
+        });
 
         btLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
@@ -311,7 +316,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
                         .addComponent(lbLocalizacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -388,6 +393,32 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Falta de Preenchimento", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btInserirActionPerformed
+
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+        if((!tfCodigoBarra.getText().trim().equals("")) || (!tfNome.getText().trim().equals(""))){
+            Medicamento medicamento = FormPrincipal.bdMedicamento.buscaMedicamento(tfCodigoBarra.getText(), tfNome.getText());
+            if(medicamento != null){
+                tfCodigoBarra.setText(medicamento.getCodigoBarra());
+                tfNome.setText(medicamento.getNome());
+                tfLaboratorio.setText(medicamento.getLaboratorio());
+                tfValorUnitario.setText(Double.toString(medicamento.getValorUnitario()));
+                taComposicao.setText(medicamento.getComposicao());
+                tfQuantidadeEstoque.setText(Integer.toString(medicamento.getQuantidadeEstoque()));
+                cbLocalizacao.setSelectedItem(medicamento.getLocalizacao());
+                JRadioButton radio;
+                Enumeration jr = bgTipo.getElements(); 
+                while ( jr.hasMoreElements() ) { 
+                    radio = (JRadioButton) jr.nextElement(); 
+                    if (radio.getText().equals(medicamento.getTipo())) 
+                        radio.setSelected(true); 
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Medicamento não encontrado!", "Pesquisa de Medicamento", JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Preencha o código de barra ou nome para fazer a busca!", "Falta de Preenchimento", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btBuscarActionPerformed
 
     /**
      * @param args the command line arguments
