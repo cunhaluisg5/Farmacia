@@ -176,7 +176,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbAnsiolitico)
                     .addComponent(rbAntibiotico)
@@ -225,7 +225,13 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         btVender.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/vender.png"))); // NOI18N
         btVender.setText("Vender");
+        btVender.setEnabled(false);
         btVender.setName("btVender"); // NOI18N
+        btVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVenderActionPerformed(evt);
+            }
+        });
 
         btSair.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
@@ -244,7 +250,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +289,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
                         .addComponent(btVender)
                         .addGap(18, 18, 18)
                         .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,7 +322,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
                         .addComponent(lbLocalizacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -345,11 +351,13 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         tfLaboratorio.setText("");
         tfValorUnitario.setText("0");
         taComposicao.setText("");
-        tfQuantidadeEstoque.setText("");
+        tfQuantidadeEstoque.setText("0");
         cbLocalizacao.setSelectedIndex(0);
         bgTipo.clearSelection();
         rbAnsiolitico.setSelected(true);
         tfCodigoBarra.requestFocus();
+        btInserir.setEnabled(true);
+        btVender.setEnabled(false);
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void tfValorUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfValorUnitarioKeyTyped
@@ -387,8 +395,14 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
         }
         
         if(medicamento.validaMedicamento()){
-            FormPrincipal.bdMedicamento.adicionaMedicamento(medicamento);
-            JOptionPane.showMessageDialog(null, "Medicamento cadastrado com sucesso!", "Cadastro de Medicamento", JOptionPane.INFORMATION_MESSAGE);
+            Medicamento med = FormPrincipal.bdMedicamento.buscaMedicamento(tfCodigoBarra.getText(), tfNome.getText());
+            if(med != null){
+                JOptionPane.showMessageDialog(null, "Já existe este medicamento cadastrado!", "Cadastro Existente", JOptionPane.ERROR_MESSAGE);
+            }else{
+                FormPrincipal.bdMedicamento.adicionaMedicamento(medicamento);
+                JOptionPane.showMessageDialog(null, "Medicamento cadastrado com sucesso!", "Cadastro de Medicamento", JOptionPane.INFORMATION_MESSAGE);
+                btInserir.setEnabled(false);
+            }            
         }else{
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Falta de Preenchimento", JOptionPane.WARNING_MESSAGE);
         }
@@ -412,6 +426,7 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
                     if (radio.getText().equals(medicamento.getTipo())) 
                         radio.setSelected(true); 
                 }
+                btVender.setEnabled(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Medicamento não encontrado!", "Pesquisa de Medicamento", JOptionPane.WARNING_MESSAGE);
             }
@@ -419,6 +434,18 @@ public class FormCadastroMedicamento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha o código de barra ou nome para fazer a busca!", "Falta de Preenchimento", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void btVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVenderActionPerformed
+        String recebe = JOptionPane.showInputDialog(null, "Informe a quantidade que será vendida!", "Quantidade de Venda", JOptionPane.YES_OPTION);
+        Medicamento medicamento = FormPrincipal.bdMedicamento.buscaMedicamento(tfCodigoBarra.getText(), tfNome.getText());
+        if(medicamento != null){
+            boolean res = medicamento.locar(Integer.parseInt(recebe));
+            if(res){
+                JOptionPane.showMessageDialog(null, "Medicamento Vendido!\nO valor total da venda é R$ " + medicamento.calcularValorTotalVenda(Integer.parseInt(recebe)), "Venda de Medicamento", JOptionPane.INFORMATION_MESSAGE);
+                tfQuantidadeEstoque.setText(Integer.toString(medicamento.getQuantidadeEstoque()));
+            }
+        }
+    }//GEN-LAST:event_btVenderActionPerformed
 
     /**
      * @param args the command line arguments
