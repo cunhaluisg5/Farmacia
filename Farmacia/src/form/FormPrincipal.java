@@ -6,6 +6,10 @@
 package form;
 
 import dao.MedicamentoDao;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,7 +40,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         JMenuItemSair = new javax.swing.JMenuItem();
         JMenuAjuda = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        JMenuItemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Farmácia");
@@ -89,9 +93,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         JMenuAjuda.setText("Ajuda");
         JMenuAjuda.setName("JMenuAjuda"); // NOI18N
 
-        jMenuItem1.setText("Sobre");
-        jMenuItem1.setName("JMenuItemSobre"); // NOI18N
-        JMenuAjuda.add(jMenuItem1);
+        JMenuItemSobre.setText("Sobre");
+        JMenuItemSobre.setName("JMenuItemSobre"); // NOI18N
+        JMenuItemSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItemSobreActionPerformed(evt);
+            }
+        });
+        JMenuAjuda.add(JMenuItemSobre);
 
         jMenuBar1.add(JMenuAjuda);
 
@@ -112,6 +121,14 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void JMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_JMenuItemSairActionPerformed
+
+    private void JMenuItemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemSobreActionPerformed
+        String nome = "Luís Gustavo da Cunha Cipriani";
+        Calendar c = Calendar.getInstance();
+        Date data = c.getTime();
+        DateFormat formataData = DateFormat.getDateInstance();
+        JOptionPane.showMessageDialog(null, nome + "\n" + formataData.format(data), "Informações", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_JMenuItemSobreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,9 +169,9 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu JMenuAjuda;
     private javax.swing.JMenuItem JMenuItemCadastrarMedicamento;
     private javax.swing.JMenuItem JMenuItemSair;
+    private javax.swing.JMenuItem JMenuItemSobre;
     private javax.swing.JMenu JMenuOperacoes;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
